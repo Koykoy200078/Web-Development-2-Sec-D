@@ -11,8 +11,23 @@ class StudentsController extends Controller
     public function index()
     {
         $students = Students::all();
-        $users = User::all();
 
-        return view('studentLists', compact('students', 'users'));
+        return view('studentLists', compact('students'));
+    }
+
+    public function newStudent(Request $request)
+    {
+        $request->validate([
+            'stdName' => 'required|max:3',
+            'stdAge' => 'required|integer',
+            'stdGender' => 'nullable',
+        ]);
+
+        $input['name'] = $request->stdName;
+        $input['age'] = $request->stdAge;
+        $input['gender'] = $request->stdGender;
+        Students::create($input);
+
+        return redirect()->route('std.index')->with('success', 'Student created successfully.');
     }
 }

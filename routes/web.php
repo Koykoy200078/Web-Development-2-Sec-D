@@ -3,9 +3,6 @@
 use App\Http\Controllers\StudentsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::get('/students-list', [StudentsController::class, 'index']);
+// STUDENTS ROUTES
+Route::get('/', [StudentsController::class, 'index'])->name('std.index');
+Route::post('/create-student', [StudentsController::class, 'newStudent'])->name('std.create');
