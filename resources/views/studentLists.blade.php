@@ -8,6 +8,8 @@
     </div>
     @endif
 
+    <a href="{{ route('std.logout') }}" class="btn btn-danger" style="float: right;">Logout</a>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">

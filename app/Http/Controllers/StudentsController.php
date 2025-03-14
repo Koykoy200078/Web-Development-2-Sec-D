@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Students;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class StudentsController extends Controller
 {
@@ -29,5 +30,15 @@ class StudentsController extends Controller
         Students::create($input);
 
         return redirect()->route('std.index')->with('success', 'Student created successfully.');
+    }
+
+    public function logout()
+    {
+        if (Session::has('loginId')) {
+            Session::pull('loginId');
+            return redirect()->route('auth.index')->with('success', 'Logout successfully');
+        } else {
+            return redirect()->route('auth.index')->with('error', 'You are not logged in');
+        }
     }
 }
